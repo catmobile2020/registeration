@@ -41,7 +41,7 @@ class FormController extends Controller
 
     public function submit(Form $form,Request $request)
     {
-        foreach ($data as $filed)
+        foreach ($request->data as $filed)
         {
             Result::create(['field_forms_id'=>$filed['id'],'value'=>$filed['value']]);
         }
