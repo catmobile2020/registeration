@@ -19,9 +19,9 @@ class CreateFieldFormsTable extends Migration
             $table->unsignedBigInteger('field_id');
             $table->text('label_name');
             $table->text('place_holder')->nullable();
-            $table->text('value')->nullable();
             $table->text('min_value')->nullable();
             $table->text('max_value')->nullable();
+            $table->boolean('is_required')->default(false);
             $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
             $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
             $table->timestamps();
