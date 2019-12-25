@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Form extends Model
 {
-<<<<<<< HEAD
     protected $fillable = [
         'description',
         'bg_color',
@@ -16,14 +15,11 @@ class Form extends Model
         'btn_name',
         'btn_color',
     ];
-=======
->>>>>>> bbfdd81ba58266b3360205fb9a2292a239f3f7fa
 
     public function fields()
     {
         return $this->hasMany(FieldForm::class);
     }
-<<<<<<< HEAD
 
     public function image()
     {
@@ -45,6 +41,4 @@ class Form extends Model
         }
         $this->delete();
     }
-=======
->>>>>>> bbfdd81ba58266b3360205fb9a2292a239f3f7fa
 }
