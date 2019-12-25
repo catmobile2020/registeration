@@ -7,6 +7,19 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+/**
+ * @SWG\Swagger(
+ * 		basePath="/api",
+ * 		@SWG\Info(
+ * 			title="Registeration System API",
+ * 			version="1.0.0",
+ *      @SWG\Contact(
+ *             email="m.mohamed@cat.com.eg"
+ *         ),
+ * 		),
+ * )
+ */
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
