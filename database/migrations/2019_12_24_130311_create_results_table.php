@@ -18,6 +18,9 @@ class CreateResultsTable extends Migration
             $table->unsignedBigInteger('field_forms_id')->index();
             $table->text('value')->nullable();
             $table->timestamps();
+
+            $table->foreign('field_forms_id')->references('id')->on('field_forms')->onDelete('cascade');
+
         });
     }
 

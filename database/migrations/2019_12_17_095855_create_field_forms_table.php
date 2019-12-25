@@ -19,6 +19,7 @@ class CreateFieldFormsTable extends Migration
             $table->unsignedBigInteger('field_id');
             $table->text('label_name');
             $table->text('place_holder')->nullable();
+            $table->text('options')->nullable();
             $table->text('min_value')->nullable();
             $table->text('max_value')->nullable();
             $table->boolean('is_required')->default(false);

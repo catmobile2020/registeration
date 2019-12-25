@@ -6,16 +6,19 @@ use App\Http\Requests\Admin\LoginRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
     public function __construct()
     {
         $this->middleware('guest:web')->except('logout');
     }
+
     public function index()
     {
-        return view('admin.pages.auth.login');
+     return view('admin.pages.auth.login');
     }
+
     public function login(LoginRequest $request)
     {
         $username = $request->username;
@@ -36,6 +39,7 @@ class AuthController extends Controller
         }
         return redirect()->back()->with('message','Error Your Credential is Wrong');
     }
+
     public function logout()
     {
         auth()->guard('web')->logout();
