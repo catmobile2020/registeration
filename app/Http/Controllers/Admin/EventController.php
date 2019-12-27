@@ -50,6 +50,15 @@ class EventController extends Controller
         return redirect()->route('admin.forms.index')->with('message','Done Successfully');
     }
 
+    public function fieldsStore(Request $request)
+    {
+        $inputs = $request->all();
+        $user= auth('web')->user();
+        $event = FieldForm::create($inputs);
+
+        return redirect()->route('admin.forms.fields', $request->form_id)->with('message','Done Successfully');
+    }
+
 
     public function fieldsIndex(Form $form)
     {
@@ -58,11 +67,31 @@ class EventController extends Controller
     }
     public function fieldsCreate (Form $form)
     {
-        $form = new Form;
         $field_form = new FieldForm;
         $types = Field::all();
         $user= auth('web')->user();
         return view('admin.pages.event.fields-create',compact('form', 'field_form', 'types'));
+    }
+
+    public function fieldsEdit(FieldForm $field_form)
+    {
+        $user= auth('web')->user();
+        $types = Field::all();
+        return view('admin.pages.event.fields-create',compact('field_form', 'types'));
+    }
+
+    public function fieldsUpdate(Request $request, FieldForm $fieldForm)
+    {
+        $inputs = $request->all();
+        $update = $fieldForm->update($inputs);
+        return redirect()->route('admin.forms.fields', $request->form_id)->with('message','Done Successfully');
+    }
+
+    public function fieldsDestroy(FieldForm $fieldForm)
+    {
+        $form = $fieldForm->form_id;
+        $fieldForm->delete();
+        return redirect()->route('admin.forms.fields', $form)->with('message','Done Successfully');
     }
 
 

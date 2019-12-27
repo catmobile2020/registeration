@@ -29,21 +29,25 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{isset($form->id) ? route('admin.forms.update',$form->id) : route('admin.forms.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{isset($field_form->id) ? route('admin.fieldForms.update',$field_form->id) : route('admin.fieldForms.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
-                            @isset($form->id)
+                            @isset($field_form->id)
                                 @method('PUT')
+                                @php $form = $field_form->form; @endphp
                             @endisset
+
                             <div class="col-lg-6">
+                                <input type="hidden" name="form_id" value="{{ $form->id }}">
                                 <div class="form-group">
                                     <label for="name">Label Name</label>
-                                    <input type="text" name="label_name" class="form-control" id="name" placeholder="Label Name" value="{{$form->label_name}}">
+                                    <input type="text" name="label_name" class="form-control" id="name" placeholder="Label Name" value="{{$field_form->label_name}}">
                                 </div>
                             </div>
+
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="address">*Required</label>
-                                    <select class="form-control" name="active">
+                                    <select class="form-control" name="is_required">
                                         <option value="1" {{$field_form->is_required ? 'selected' : ''}}>Yes</option>
                                         <option value="0" {{$field_form->is_required ? '' : 'selected'}}>No</option>
                                     </select>
@@ -52,19 +56,37 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="address">*Type</label>
-                                    <select class="form-control" name="active">
+                                    <select id="type" class="form-control" name="field_id">
                                         @foreach($types as $type)
-                                        <option value="{{ $type->id }}" {{$field_form->field_id ? 'selected' : ''}}>
+                                        <option value="{{ $type->id }}" @if($field_form->field_id == $type->id) selected @endif}}>
                                             {{ $type->name }}
                                         </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div id="placeholder" class="col-lg-6">
                                 <div class="form-group">
                                     <label for="date">Placeholder</label>
-                                    <input type="text" name="place_holder" class="form-control" placeholder="Placeholder" id="date" value="{{$form->place_holder}}">
+                                    <input type="text" name="place_holder" class="form-control" placeholder="Placeholder" id="place_holder" value="{{$field_form->place_holder}}">
+                                </div>
+                            </div>
+                            <div id="options" class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="options">Options</label>
+                                    <input type="text" name="options" class="form-control" placeholder="options: [value1, value2, ...]" value="{{$field_form->options}}">
+                                </div>
+                            </div>
+                            <div id="minvalue" class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="min_value">Min Value</label>
+                                    <input type="number" name="min_value" class="form-control" placeholder="Min Value" value="{{$field_form->min_value}}">
+                                </div>
+                            </div>
+                            <div id="maxvalue" class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="max_value">Max Value</label>
+                                    <input type="number" name="max_value" class="form-control" placeholder="Max Value" value="{{$field_form->max_value}}">
                                 </div>
                             </div>
 
@@ -78,4 +100,35 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script>
+    $(function() {
+        $('#options').hide();
+        $('#placeholder').show();
+        $('#minvalue').show();
+        $('#maxvalue').show();
+        $('#type').change(function(){
+            if($('#type').val() == 2) {
+                $('#options').show();
+                $('#placeholder').hide();
+                $('#minvalue').hide();
+                $('#maxvalue').hide();
+            } else if($('#type').val() == 1 || $('#type').val() == 5){
+                $('#placeholder').show();
+                $('#minvalue').show();
+                $('#maxvalue').show();
+                $('#options').hide();
+            }else{
+                $('#placeholder').hide();
+                $('#minvalue').hide();
+                $('#maxvalue').hide();
+                $('#options').hide();
+            }
+
+
+        });
+    });
+</script>
 @endsection

@@ -38,6 +38,41 @@ class FormController extends Controller
         return FormResource::make($form);
     }
 
+    /**
+     *
+     * @SWG\Post(
+     *      tags={"forms"},
+     *      path="/forms/{form}",
+     *      summary="post Values",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *     @SWG\Parameter(
+     *         name="form",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="field_forms_id",
+     *         in="formData",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="value",
+     *         in="formData",
+     *         required=true,
+     *         type="string",
+     *         format="string",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     * @param Form $form
+     * @return FormResource
+     */
 
     public function submit(Form $form,Request $request)
     {

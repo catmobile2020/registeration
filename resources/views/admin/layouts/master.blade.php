@@ -9,7 +9,7 @@
     <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, Mouldifi, web design, CSS3">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="auth_id" content="{{ auth()->id() }}">
-    <title>Events System | @yield('title')</title>
+    <title>Registration System | @yield('title')</title>
     <!-- Site favicon -->
     <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/admin/images/favicon.ico')}}' />
     <!-- /site favicon -->

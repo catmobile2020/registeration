@@ -52,10 +52,10 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$row->label_name}}</td>
                                         <td>{{$row->place_holder}}</td>
-                                        <td>{{$row->type}}</td>
-                                        <td>{{$row->min_value}}</td>
-                                        <td>{{$row->max_value}}</td>
-                                        <td>{{$row->is_required}}</td>
+                                        <td>{{$row->field->name}}</td>
+                                        <td>{{$row->min_value ? $row->min_value : '0'}}</td>
+                                        <td>{{$row->max_value ? $row->max_value : '191'}}</td>
+                                        <td>{{$row->is_required ? 'Yes' : 'No'}}</td>
 
 
 
@@ -63,11 +63,10 @@
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a href="{{route('admin.forms.edit',$row->id)}}">Edit</a></li>
+                                                    <li><a href="{{route('admin.fieldForms.edit',$row->id)}}">Edit</a></li>
                                                     @if (auth()->user()->type == 0)
-                                                        <li><a href="{{route('admin.forms.destroy',$row->id)}}">Delete</a></li>
+                                                        <li><a href="{{route('admin.fieldForms.destroy',$row->id)}}">Delete</a></li>
                                                     @endif
-                                                    <li><a href="{{route('admin.forms.fields',$row->id)}}">Form Fields</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -94,23 +93,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('js')
-<script>
-    $(document).on('change','.changeStatus',function () {
-        let  active = $(this).val();
-        let  id = $(this).data('id');
-        $.ajax({
-            data:{id:id,active:active},
-            success:function (result) {
-                $('#statusResult').removeClass('sr-only');
-                $('#statusResult').html(result);
-            },
-            error:function (errors) {
-                console.log(errors);
-            }
-        });
-    });
-</script>
 @endsection

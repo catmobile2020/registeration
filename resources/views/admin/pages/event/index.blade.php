@@ -55,9 +55,9 @@
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
                                                     <li><a href="{{route('admin.forms.edit',$row->id)}}">Edit</a></li>
-                                                    @if (auth()->user()->type == 0)
-                                                        <li><a href="{{route('admin.forms.destroy',$row->id)}}">Delete</a></li>
-                                                    @endif
+                                                    {{--@if (auth()->user()->type == 0)--}}
+                                                        {{--<li><a href="{{route('admin.forms.destroy',$row->id)}}">Delete</a></li>--}}
+                                                    {{--@endif--}}
                                                     <li><a href="{{route('admin.forms.fields',$row->id)}}">Form Fields</a></li>
                                                 </ul>
                                             </div>

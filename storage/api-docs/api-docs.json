@@ -34,14 +34,12 @@
                         "jwt": []
                     }
                 ]
-            }
-        },
-        "/forms/{form}/submit": {
+            },
             "post": {
                 "tags": [
                     "forms"
                 ],
-                "summary": "submit form data",
+                "summary": "post Values",
                 "parameters": [
                     {
                         "name": "form",
@@ -51,16 +49,18 @@
                         "format": "integer"
                     },
                     {
-                        "name": "data",
+                        "name": "field_forms_id",
                         "in": "formData",
                         "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            }
-                        }
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "value",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
                     }
                 ],
                 "responses": {
